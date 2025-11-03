@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /programa-gestion-proyectos-main/
+RewriteBase /programa-gestion-proyectos/
 
 # Si el archivo o directorio físico NO existe
 RewriteCond %{REQUEST_FILENAME} !-f

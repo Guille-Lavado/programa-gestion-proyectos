@@ -65,11 +65,6 @@ class Model
 
     public function aplicarFiltros($nombre, $tipo, $tecnologias, $estado): array
     {
-        // Si no hay filtros, devolver todos los proyectos
-        if (empty($nombre) && empty($tipo) && empty($tecnologias) && empty($estado)) {
-            return $this->proyectos;
-        }
-
         $proyectosFiltrados = [];
         
         foreach ($this->proyectos as $proyecto) {
