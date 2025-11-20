@@ -1,0 +1,36 @@
+{
+  "es": {
+    "titulo": "Gestor de Proyectos",
+    "filtros": "Filtros",
+    "nombre": "Nombre",
+    "descripcion": "Descripción",
+    "tipo": "Tipo",
+    "tecnologias": "Tecnologías",
+    "estado": "Estado",
+    "ninguno": "Ninguno",
+    "filtrar": "Filtrar",
+    "limpiar": "Limpiar",
+    "mostrando": "Mostrando",
+    "proyectos": "proyectos",
+    "total": "Total",
+    "proyectos_titulo": "Proyectos",
+    "crear": "Crear"
+  },
+  "en": {
+    "titulo": "Project Manager",
+    "filtros": "Filters",
+    "nombre": "Name",
+    "descripcion": "Description",
+    "tipo": "Type",
+    "tecnologias": "Technologies",
+    "estado": "Status",
+    "ninguno": "None",
+    "filtrar": "Filter",
+    "limpiar": "Clear",
+    "mostrando": "Showing",
+    "proyectos": "projects",
+    "total": "Total",
+    "proyectos_titulo": "Projects",
+    "crear": "Create"
+  }
+}

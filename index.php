@@ -1,15 +1,18 @@
 <?php
 require 'lib/Router.php';
 
-// Ruta absoluta del server
-$route = explode($_SERVER["DOCUMENT_ROOT"], str_replace("\\", "/", __DIR__))[1];
+// Ruta relativa del server
+$route = explode($_SERVER["DOCUMENT_ROOT"], str_replace("\\", "/", getcwd()))[1]."/";
 
 // Crear instancia del Router
 $router = new Router();
 
 // Definir rutas simples
-$router->add($route."/", 'InicioController@index');
-$router->add($route."/sesion", 'SesionController@index');
+$router->add($route."", 'InicioController@index');
+$router->add($route."sesion", 'SesionController@index');
+
+$router->add($route."form/form", 'InicioController@formCrearProyecto');
+$router->add($route."form/crearProyecto", 'InicioController@crearProyecto');
 
 // Procesar la ruta actual
 $router->dispatch($_SERVER['REQUEST_URI']);

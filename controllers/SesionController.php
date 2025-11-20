@@ -27,7 +27,7 @@ class SesionController
         }
 
         // Obtener idioma actual de la cookie para preseleccionar en el formulario
-        $idioma_actual = $_COOKIE["idioma"] ?? "es";
+        $idioma = $_COOKIE["idioma"] ?? "es";
         
         require_once "views/sesion.php";
     }

@@ -3,44 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $idioma === 'en' ? 'Project Manager' : 'Gestor de Proyectos' ?></title>
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="<?= $this->route ?>public/css/style.css">
 </head>
 <body>
     <?php
         // Textos traducidos
-        $textos = [
-            'es' => [
-                'titulo' => 'Gestor de Proyectos',
-                'filtros' => 'Filtros',
-                'nombre' => 'Nombre',
-                'tipo' => 'Tipo',
-                'tecnologias' => 'Tecnologías',
-                'estado' => 'Estado',
-                'ninguno' => 'Ninguno',
-                'filtrar' => 'Filtrar',
-                'limpiar' => 'Limpiar',
-                'mostrando' => 'Mostrando',
-                'proyectos' => 'proyectos',
-                'total' => 'Total',
-                'proyectos_titulo' => 'Proyectos'
-            ],
-            'en' => [
-                'titulo' => 'Project Manager',
-                'filtros' => 'Filters',
-                'nombre' => 'Name',
-                'tipo' => 'Type',
-                'tecnologias' => 'Technologies',
-                'estado' => 'Status',
-                'ninguno' => 'None',
-                'filtrar' => 'Filter',
-                'limpiar' => 'Clear',
-                'mostrando' => 'Showing',
-                'proyectos' => 'projects',
-                'total' => 'Total',
-                'proyectos_titulo' => 'Projects'
-            ]
-        ];
+        $rutaJson = "./public/idioma.json";
+        $json = fopen($rutaJson, "r");
+
+        if ($json) {
+            $data = fread($json, filesize($rutaJson));
+            fclose($json);
+        }
         
+        $textos = json_decode($data, true);
         $t = $textos[$idioma];
 
         // Función para mostrar tecnologías
@@ -114,10 +90,11 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            
+
             <div class="botones">
                 <button type="submit"><?= $t['filtrar'] ?></button>
                 <a class="btn-limpiar" href="./"><?= $t['limpiar'] ?></a>
+                <a class="btn-limpiar" href="./form/form"><?= $t['crear'] ?></a>
             </div>
         </form>
         
@@ -133,4 +110,4 @@
         <p><?= $t['total'] ?>: <?= $proyectos_length ?></p>
     </div>
 </body>
-</html>s
+</html>
