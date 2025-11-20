@@ -15,9 +15,9 @@ class Model
 
         $this->proyectos = self::getProyectos();
 
-        echo "Ruta actual __DIR__: ".__DIR__;
-        echo "<br>";
-        echo "Ruta actual getcwd: ".getcwd();
+        // echo "Ruta actual __DIR__: ".__DIR__;
+        // echo "<br>";
+        // echo "Ruta actual getcwd: ".getcwd();
     }
 
     private function juntarProyectosTecnologias($tablaProyectos, $tablaTecnologias) {
@@ -35,6 +35,7 @@ class Model
             }
 
             array_push($proyectos, [
+                "id" => $filaProyecto["id"],
                 "nombre" => $filaProyecto["nombre"],
                 "descripcion" => $filaProyecto["descripcion"],
                 "tipo" => $filaProyecto["tipo"],
@@ -115,6 +116,12 @@ class Model
         } catch (PDOException $e) {
             echo "Error en el insert: ".$e->getMessage();
         }
+    }
+
+    public function rmProyecto($id)
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM proyectos WHERE id=?");
+        $stmt->execute([$id]);
     }
 
     public function getTiposUnicos(): array

@@ -30,20 +30,9 @@ CREATE TABLE proyecto_tecnologias (
   id_proyectos int NOT NULL,
   id_tecnologias int NOT NULL,
   PRIMARY KEY(id_proyectos, id_tecnologias),
-  CONSTRAINT fk_proyectos FOREIGN KEY (id_proyectos) REFERENCES proyectos(id),
-  CONSTRAINT fk_tecnologias FOREIGN KEY (id_tecnologias) REFERENCES tecnologias(id)
+  CONSTRAINT fk_proyectos FOREIGN KEY (id_proyectos) REFERENCES proyectos(id) ON DELETE CASCADE,
+  CONSTRAINT fk_tecnologias FOREIGN KEY (id_tecnologias) REFERENCES tecnologias(id) ON DELETE CASCADE
 );
-
-/*
-SELECT p.nombre, t.nombre AS tecnologia FROM proyectos p
-INNER JOIN proyecto_tecnologias pt on p.id = pt.id_proyectos
-INNER JOIN tecnologias t on pt.id_tecnologias = t.id;
-
-Mostrar nombre proyecto, descripcion, tipo y estado
-SELECT p.nombre, p.descripcion, t.nombre AS tipo, e.nombre AS estado FROM proyectos p
-INNER JOIN tipo t on p.id_tipo = t.id
-INNER JOIN estado e on p.id_estado = e.id;
-*/
 
 INSERT INTO tipo (id, nombre) VALUES (1, 'Proyecto interno');
 INSERT INTO tipo (id, nombre) VALUES (2, 'Consultoría');

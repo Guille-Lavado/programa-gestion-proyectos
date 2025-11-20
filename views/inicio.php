@@ -30,24 +30,32 @@
         }
 
         // Función para mostrar un proyecto
-        function mostrarProyecto($proyecto){
-            $html = '<div class="proyecto">';
-            $html .= "<h3>" . $proyecto["nombre"] . "</h3>";
-            $html .= '<p class="descripcion">' . $proyecto["descripcion"] . "</p>";
-            $html .= '<div class="detalles">';
-            $html .= '<span class="tipo">' . $proyecto["tipo"] . "</span>";
-            $html .= '<span class="estado" data-estado="' . $proyecto["estado"] . '">' . $proyecto["estado"] . "</span>";
-            $html .= "</div>";
-            $html .='<div class="tecnologias-container">' .mostrarTecnologias($proyecto["tecnologias"]) ."</div>";
-            $html .= "</div>";
+        function mostrarProyecto($proyecto, $t){
+            $tecnologiasHTML = mostrarTecnologias($proyecto["tecnologias"]);
+            $html = <<<END
+                <form method="GET" action="./form/borrarMetodo">
+                    <div class="proyecto">
+                        <h3>{$proyecto["nombre"]}</h3>
+                        <p class="descripcion">{$proyecto["descripcion"]}</p>
+                        <div class="detalles">
+                            <span class="tipo">{$proyecto["tipo"]}</span>
+                            <span class="estado" data-estado="{$proyecto["estado"]}">{$proyecto["estado"]}</span>
+                        </div>
+                        <div class="tecnologias-container">{$tecnologiasHTML}</div>
+                        <input type="hidden" name="id" value="{$proyecto["id"]}" />
+                        <br>
+                        <input type="submit" class="btn-limpiar" value="{$t["eliminar"]}">
+                    </div>
+                </form>
+            END;
             return $html;
         }
     ?>
 
     <div class="container">
-        <h1><?= $t['titulo'] ?></h1>
+        <h1><?= $t["titulo"] ?></h1>
         
-        <h3><?= $t['filtros'] ?></h3>
+        <h3><?= $t["filtros"] ?></h3>
         <form method="GET">
             <div class="filtro">
                 <label><?= $t['nombre'] ?>: </label>
@@ -103,7 +111,7 @@
         <div class="proyectos">
             <h2><?= $t['proyectos_titulo'] ?></h2>
             <?php foreach ($proyectosFiltrados as $proyecto): ?>
-                <?= mostrarProyecto($proyecto) ?>
+                <?= mostrarProyecto($proyecto, $t) ?>
             <?php endforeach; ?>
         </div>
         

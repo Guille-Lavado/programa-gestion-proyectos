@@ -14,7 +14,8 @@
     "proyectos": "proyectos",
     "total": "Total",
     "proyectos_titulo": "Proyectos",
-    "crear": "Crear"
+    "crear": "Crear",
+    "eliminar": "Eliminar"
   },
   "en": {
     "titulo": "Project Manager",
@@ -31,6 +32,7 @@
     "proyectos": "projects",
     "total": "Total",
     "proyectos_titulo": "Projects",
-    "crear": "Create"
+    "crear": "Create",
+    "eliminar": "Delete"
   }
 }

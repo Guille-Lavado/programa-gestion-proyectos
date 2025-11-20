@@ -63,6 +63,17 @@ class InicioController
         header("location: {$this->route}");
     }
 
+    public function borrarMetodo()
+    {
+        if (isset($_GET["id"])) {
+            $id = $_GET["id"];
+            $this->model->rmProyecto($id);
+            header("location: {$this->route}");
+        } else {
+            echo "Error, ID no existe.";
+        }
+    }
+
     public function sesionLog()
     {
         if (session_status() === PHP_SESSION_NONE) {
