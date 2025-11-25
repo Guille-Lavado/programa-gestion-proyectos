@@ -50,6 +50,12 @@ class Model
     {
         $proyectos = [];
 
+        /**
+        * SELECT p.nombre, GROUP_CONCAT(t.nombre) FROM proyectos p
+        * LEFT JOIN proyecto_tecnologias pt on pt.id_proyectos = p.id
+        * LEFT JOIN tecnologias t on pt.id_tecnologias = t.id
+        * GROUP BY p.id;
+        */
         try {
             $sql = <<<END
             SELECT pt.id_proyectos as id, t.nombre AS tecnologia FROM proyecto_tecnologias pt 
