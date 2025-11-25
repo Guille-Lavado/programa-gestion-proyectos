@@ -120,33 +120,57 @@ class Model
 
     public function rmProyecto($id)
     {
-        $stmt = $this->pdo->prepare("DELETE FROM proyectos WHERE id=?");
-        $stmt->execute([$id]);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM proyectos WHERE id=?");
+            $stmt->execute([$id]);
+        } catch (PDOException $e) {
+            echo "Error: ".$e->getMessage();
+        }
     }
 
     public function getTiposUnicos(): array
     {
-        return array_unique(array_column($this->proyectos, "tipo"));
+        $tiposUnicos = [];
+        try {
+            $stmt = $this->pdo->query("SELECT nombre FROM tipo");
+            $tiposUnicos = array_column($stmt->fetchAll(PDO::FETCH_ASSOC), "nombre");
+        } catch (PDOException $e) {
+            echo "Error: ".$e->getMessage();
+        }
+
+        return $tiposUnicos;
     }
 
     public function getTecnologiasUnicas(): array
     {
         $tecnologiasUnicas = [];
-        foreach ($this->proyectos as $proyecto) {
-            $tecnologiasUnicas = array_merge($tecnologiasUnicas, $proyecto["tecnologias"]);
+        try {
+            $stmt = $this->pdo->query("SELECT nombre FROM tecnologias");
+            $tecnologiasUnicas = array_column($stmt->fetchAll(PDO::FETCH_ASSOC), "nombre");
+        } catch (PDOException $e) {
+            echo "Error: ".$e->getMessage();
         }
-        return array_unique($tecnologiasUnicas);
+
+        return $tecnologiasUnicas;
     }
 
     public function getEstadosUnicos(): array
     {
-        return array_unique(array_column($this->proyectos, "estado"));
+        $estadosUnicos = [];
+        try {
+            $stmt = $this->pdo->query("SELECT nombre FROM estado");
+            $estadosUnicos = array_column($stmt->fetchAll(PDO::FETCH_ASSOC), "nombre");
+        } catch (PDOException $e) {
+            echo "Error: ".$e->getMessage();
+        }
+
+        return $estadosUnicos;
     }
 
     public function aplicarFiltros($nombre, $tipo, $tecnologias, $estado): array
     {
         $proyectosFiltrados = [];
-        
+
         foreach ($this->proyectos as $proyecto) {
             // Filtro por nombre (búsqueda parcial case-insensitive)
             if (!empty($nombre) && stripos($proyecto["nombre"], $nombre) === false) {
